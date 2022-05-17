@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+    backend:
+        container_name: backend
+        restart: always
+        build:
+            context: .
+            dockerfile: Dockerfile
+            target: backend
+        ports:
+            - 5000:5000
+        environment:
+            JWT_SECRET: 4ee01ac6a4e44dfaa182e92abbad7f79
+            DEFAULT_LOGIN: letscode
+            DEFAULT_PASSWORD: lets@123
