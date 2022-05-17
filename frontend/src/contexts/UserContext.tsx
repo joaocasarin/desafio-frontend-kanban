@@ -1,15 +1,13 @@
-import axios from 'axios';
+/* eslint-disable react/jsx-no-constructed-context-values */
 import { createContext, useState } from 'react';
-import { LoginResponseData, UserContextProps, UserProviderProps } from '../interfaces';
-import { CreatedTask, Task } from '../interfaces/Task';
-
-const apiUrl = axios.create({
-    baseURL: 'http://localhost:5000',
-    headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-    }
-});
+import {
+    LoginResponseData,
+    UserContextProps,
+    UserProviderProps,
+    CreatedTask,
+    Task
+} from '../interfaces';
+import { api } from '../utils';
 
 export const UserContext = createContext({} as UserContextProps);
 
@@ -21,7 +19,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 
     const login = async (username: string, password: string) => {
         setIsLoading(true);
-        const response = await apiUrl.post('/auth/login', {
+        const response = await api.post('/login', {
             username,
             password
         });
@@ -32,19 +30,17 @@ export const UserProvider = ({ children }: UserProviderProps) => {
             throw new Error('Invalid credentials');
         }
 
-        // setToken(data);
         localStorage.setItem('token', data);
         setIsLoading(false);
     };
 
     const logout = () => {
-        // setToken('');
         localStorage.removeItem('token');
     };
 
     const isLoggedIn = async () => {
         setIsLoading(true);
-        const response = await apiUrl.get('/cards', {
+        const response = await api.get('/cards', {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -58,7 +54,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     const getTasks = async () => {
         setIsLoading(true);
 
-        const response = await apiUrl.get('/cards', {
+        const response = await api.get('/cards', {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -79,7 +75,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     const createTask = async (task: Task) => {
         setIsLoading(true);
 
-        const response = await apiUrl.post('/cards', task, {
+        const response = await api.post('/cards', task, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -100,7 +96,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     const deleteTask = async (id: string) => {
         setIsLoading(true);
 
-        const response = await apiUrl.delete(`/cards/${id}`, {
+        const response = await api.delete(`/cards/${id}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -121,7 +117,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     const updateTask = async ({ id, conteudo, lista, titulo }: CreatedTask) => {
         setIsLoading(true);
 
-        const response = await apiUrl.put(
+        const response = await api.put(
             `/cards/${id}`,
             {
                 conteudo,

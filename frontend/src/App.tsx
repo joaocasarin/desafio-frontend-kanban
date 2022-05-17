@@ -1,10 +1,10 @@
 import { Route, Routes } from 'react-router-dom';
-import { LoginForm } from './components/Login';
-import { Dashboard } from './components/Dashboard';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
 
 const App = () => (
     <Routes>
-        <Route path='/' element={<LoginForm />} />
+        <Route path='/' element={<Login />} />
         <Route path='/dashboard' element={<Dashboard />} />
     </Routes>
 );

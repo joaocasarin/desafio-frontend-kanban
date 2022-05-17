@@ -1,8 +1,8 @@
 import { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { UserContext } from '../../contexts/UserContext';
-import ActionBoard from '../Boards';
-import NewTaskBoard from '../Boards/CreateTaskBoard';
+import ActionBoard from '../../components/Boards';
+import NewTaskBoard from '../../components/Boards/CreateTaskBoard';
 
 const DashboradDiv = styled.div`
     display: flex;
@@ -14,7 +14,7 @@ const DashboradDiv = styled.div`
     height: 100vh;
 `;
 
-export const Dashboard = () => {
+const Dashboard = () => {
     const { getTasks } = useContext(UserContext);
 
     useEffect(() => {
@@ -32,3 +32,5 @@ export const Dashboard = () => {
         </DashboradDiv>
     );
 };
+
+export default Dashboard;

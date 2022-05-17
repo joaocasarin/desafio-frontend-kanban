@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { CreatedTask, Task } from './Task';
 
 export interface UserContextProps {
@@ -10,4 +11,8 @@ export interface UserContextProps {
     deleteTask: (id: string) => Promise<CreatedTask[] | undefined>;
     updateTask: (task: CreatedTask) => Promise<CreatedTask | undefined>;
     tasks: CreatedTask[];
+}
+
+export interface UserProviderProps {
+    children: ReactNode;
 }

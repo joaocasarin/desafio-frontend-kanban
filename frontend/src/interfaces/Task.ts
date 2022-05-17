@@ -5,8 +5,8 @@ export interface Task {
 }
 
 export interface CreatedTask {
+    id: string;
     titulo: string;
     conteudo: string;
     lista: string;
-    id: string;
 }

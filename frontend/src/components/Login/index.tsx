@@ -55,7 +55,7 @@ const Button = styled.button`
     }
 `;
 
-export const LoginForm = () => {
+const LoginForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -82,3 +82,5 @@ export const LoginForm = () => {
         </Form>
     );
 };
+
+export default LoginForm;
