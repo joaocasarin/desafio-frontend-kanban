@@ -1,3 +1,3 @@
 export interface ActionBoardProps {
-    title: 'ToDo' | 'Doing' | 'Done';
+    title: 'To Do' | 'Doing' | 'Done';
 }

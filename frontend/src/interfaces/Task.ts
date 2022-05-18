@@ -4,9 +4,6 @@ export interface Task {
     lista: string;
 }
 
-export interface CreatedTask {
+export interface CreatedTask extends Task {
     id: string;
-    titulo: string;
-    conteudo: string;
-    lista: string;
 }
