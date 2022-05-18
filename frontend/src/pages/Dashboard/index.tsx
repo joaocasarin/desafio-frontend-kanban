@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { KanbanContext } from '../../contexts/KanbanContext';
 import { UserContext } from '../../contexts/UserContext';
 import ActionBoard from '../../components/Column';
-import NewTaskBoard from '../../components/Column/NewTaskColumn';
 import Modal from '../../components/Modal';
 
 const NewDashboard = styled.div`
@@ -53,7 +52,7 @@ const Dashboard = () => {
 
     return (
         <NewDashboard>
-            <NewTaskBoard key='new' />
+            <ActionBoard title='New' newTask />
             <ActionBoard key='todo' title='To Do' />
             <ActionBoard key='doing' title='Doing' />
             <ActionBoard key='done' title='Done' />

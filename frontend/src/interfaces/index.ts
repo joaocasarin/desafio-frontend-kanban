@@ -1,6 +1,5 @@
-export * from './LoginResponseData';
 export * from './UserContextProps';
-export * from './ActionBoardProps';
+export * from './ColumnProps';
 export * from './KanbanContextProps';
 export * from './Task';
 export * from './ModalProps';
