@@ -3,7 +3,8 @@ import LoginForm from '../../components/LoginForm';
 
 const Div = styled.div`
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
 
     background-color: #8edcff;
 

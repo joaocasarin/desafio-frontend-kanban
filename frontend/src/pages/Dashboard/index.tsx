@@ -5,6 +5,8 @@ import ActionBoard from '../../components/Column';
 import NewTaskBoard from '../../components/Column/NewTaskColumn';
 import { KanbanContext } from '../../contexts/KanbanContext';
 import Modal from '../../components/Modal';
+import { UserContext } from '../../contexts/UserContext';
+import { Navigate } from 'react-router-dom';
 
 const NewDashboard = styled.div`
     display: flex;
@@ -17,6 +19,12 @@ const NewDashboard = styled.div`
 `;
 
 const Dashboard = () => {
+    const { isAuthenticated } = useContext(UserContext);
+
+    if (!isAuthenticated) {
+        return <Navigate to='/' replace />;
+    }
+
     const { getTasks } = useContext(KanbanContext);
     const [message, setMessage] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);

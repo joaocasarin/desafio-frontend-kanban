@@ -1,6 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useContext, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { UserContext } from '../../contexts/UserContext';
+import Modal from '../Modal';
 
 const Form = styled.form`
     width: 350px;
@@ -56,8 +59,17 @@ const Button = styled.button`
 `;
 
 const LoginForm = () => {
+    const { login, isAuthenticated } = useContext(UserContext);
+
+    if (isAuthenticated) {
+        return <Navigate to='/dashboard' replace />;
+    }
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const onCloseModal = () => setIsModalOpen(false);
 
     const onUsernameChange = (event: ChangeEvent<HTMLInputElement>) => {
         setUsername(event.currentTarget.value);
@@ -67,18 +79,44 @@ const LoginForm = () => {
         setPassword(event.currentTarget.value);
     };
 
+    const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        try {
+            await login(username, password);
+
+            setUsername('');
+            setPassword('');
+
+            return <Navigate to='/dashboard' replace />;
+        } catch (error) {
+            console.log(error);
+            setIsModalOpen(true);
+        }
+    };
+
     return (
-        <Form>
+        <Form onSubmit={onSubmit}>
             <h2>Login</h2>
+
             <label htmlFor='username'>
                 Username:
                 <Input type='text' id='username' onChange={onUsernameChange} value={username} />
             </label>
+
             <label htmlFor='password'>
                 Password:
                 <Input type='password' id='password' onChange={onPasswordChange} value={password} />
             </label>
+
             <Button type='submit'>Login</Button>
+
+            <Modal
+                displayType='error'
+                isOpen={isModalOpen}
+                onClose={onCloseModal}
+                message='Could not login'
+            />
         </Form>
     );
 };

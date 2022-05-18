@@ -4,6 +4,8 @@ import { ChangeEvent, useContext, useState } from 'react';
 import styled from 'styled-components';
 import { KanbanContext } from '../../contexts/KanbanContext';
 import Modal from '../Modal';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { UserContext } from '../../contexts/UserContext';
 
 const NewColumn = styled.div`
     width: calc(calc(100vw - 140px) / 4);
@@ -20,6 +22,7 @@ const NewColumn = styled.div`
 `;
 
 const Column = () => {
+    const { logout } = useContext(UserContext);
     const [taskTitle, setTaskTitle] = useState('');
     const [taskContent, setTaskContent] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -101,6 +104,9 @@ const Column = () => {
             </div>
             <IconButton aria-label='add' size='large' onClick={createNewTask}>
                 <AddCircle sx={{ color: '#63a9dc' }} fontSize='inherit' />
+            </IconButton>
+            <IconButton aria-label='add' size='large' onClick={logout}>
+                <LogoutIcon fontSize='inherit' />
             </IconButton>
             <Modal
                 displayType={modalType}
