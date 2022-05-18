@@ -1,7 +1,5 @@
-import { useContext, useEffect } from 'react';
 import styled from 'styled-components';
-import { UserContext } from '../../contexts/UserContext';
-import LoginForm from '../../components/Login';
+import LoginForm from '../../components/LoginForm';
 
 const Div = styled.div`
     display: flex;
@@ -13,20 +11,10 @@ const Div = styled.div`
     height: 100vh;
 `;
 
-const Dashboard = () => {
-    const { getTasks } = useContext(UserContext);
-
-    useEffect(() => {
-        (async () => {
-            await getTasks();
-        })();
-    }, []);
-
-    return (
-        <Div>
-            <LoginForm />
-        </Div>
-    );
-};
+const Dashboard = () => (
+    <Div>
+        <LoginForm />
+    </Div>
+);
 
 export default Dashboard;
