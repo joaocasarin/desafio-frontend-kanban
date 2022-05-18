@@ -1,5 +1,16 @@
 # desafio-frontend-kanban
 
+## Index
+
+- [Desafio Frontend Kanban](#desafio-frontend-kanban)
+- [Descrição](#desafio)
+- [Requisitos](#r)
+- [Instalação](#instalacao)
+- [Rotas](#rotas-da-aplicacao)
+- [Bibliotecas](#bibliotecas-utilizadas)
+- [Duvidas](#duvidas)
+- [Observacoes](#observacoes)
+
 ## Desafio
 
 Construir um frontend (neste caso utilizei React.js + TypeScript) de um quadro Kanban. O quadro deverá ser capaz de criar tarefas (diretamente na coluna To Do), onde cada card deverá conter botões para movê-los entre as colunas conforme a necessidade, para editar o mesmo e para visualizar.
@@ -71,7 +82,7 @@ Construir um frontend (neste caso utilizei React.js + TypeScript) de um quadro K
     $ docker-compose -f docker-compose.dev.yml --env-file ./BACK/.env up -d
 ```
 
-#### A aplicação estará disponível em `http://localhost:3000`
+#### A aplicação estará disponível em [`http://localhost:3000`](http://localhost:3000)
 
 ### PS.: Os containers a cima serão executados em desenvolvimento. Para criar os containers de produção, utilize o comando:
 
@@ -79,9 +90,9 @@ Construir um frontend (neste caso utilizei React.js + TypeScript) de um quadro K
     $ docker-compose --env-file ./BACK/.env up -d
 ```
 
-#### Acesse a aplicação em `http://localhost`
+#### Acesse a aplicação em [`http://localhost`](http://localhost)
 
-## Rotas da aplicação
+## Rotas da aplicacao
 
 - `/` - Página inicial com formulário de login
 - `/dashboard` - Página para utilização do quadro Kanban
@@ -96,11 +107,11 @@ Construir um frontend (neste caso utilizei React.js + TypeScript) de um quadro K
 - `Styled Components` - para criar alguns componentes customizados
 - `Eslint` e `Prettier` - para realizar o lint e format do código
 
-## Dúvidas
+## Duvidas
 
 - O requisito `O conteudo do card pode ser markdown ...` não foi totalmente claro se era obrigatoriamente para renderizar um markdown ou não. Acabei optando por um modal para a visualização e edição do card.
 
-## Observações
+## Observacoes
 
 - A utilização da biblioteca `random-color` tornou possível uma variação de cores para os cards, tornando-os mais agradáveis. Porém, a cada requisição à api - mover de coluna, atualizar dados, visualizar card, apagar card -, as cores são geradas novamente. Em específico o caso de visualizar, a cor é gerada apenas para o card em questão, mas nos outros casos, todas as cores são recriadas. Não tive muita ideia de como corrigir este bug.
 
