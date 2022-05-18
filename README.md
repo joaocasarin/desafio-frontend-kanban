@@ -1,5 +1,7 @@
 # desafio-frontend-kanban
 
+![kanban](https://user-images.githubusercontent.com/48847394/169169846-1776d112-1081-4889-8fb3-5b817743750d.gif)
+
 ## Index
 
 - [Desafio Frontend Kanban](#desafio-frontend-kanban)
