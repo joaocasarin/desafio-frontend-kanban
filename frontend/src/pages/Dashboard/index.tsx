@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { KanbanContext } from '../../contexts/KanbanContext';
+import { UserContext } from '../../contexts/UserContext';
 import ActionBoard from '../../components/Column';
 import NewTaskBoard from '../../components/Column/NewTaskColumn';
-import { KanbanContext } from '../../contexts/KanbanContext';
 import Modal from '../../components/Modal';
-import { UserContext } from '../../contexts/UserContext';
-import { Navigate } from 'react-router-dom';
 
 const NewDashboard = styled.div`
     display: flex;
@@ -21,18 +21,12 @@ const NewDashboard = styled.div`
 const Dashboard = () => {
     const { isAuthenticated } = useContext(UserContext);
 
-    if (!isAuthenticated) {
-        return <Navigate to='/' replace />;
-    }
-
     const { getTasks } = useContext(KanbanContext);
     const [message, setMessage] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalDisplayType, setModalDisplayType] = useState<'edit' | 'view' | 'error' | 'success'>(
         'error'
     );
-
-    const onCloseModal = () => setIsModalOpen(false);
 
     useEffect(() => {
         (async () => {
@@ -50,6 +44,12 @@ const Dashboard = () => {
             }
         })();
     }, []);
+
+    if (!isAuthenticated) {
+        return <Navigate to='/' replace />;
+    }
+
+    const onCloseModal = () => setIsModalOpen(false);
 
     return (
         <NewDashboard>

@@ -1,11 +1,11 @@
+import { ChangeEvent, useContext, useState } from 'react';
 import { AddCircle } from '@mui/icons-material';
 import { IconButton, TextField } from '@mui/material';
-import { ChangeEvent, useContext, useState } from 'react';
+import LogoutIcon from '@mui/icons-material/Logout';
 import styled from 'styled-components';
 import { KanbanContext } from '../../contexts/KanbanContext';
-import Modal from '../Modal';
-import LogoutIcon from '@mui/icons-material/Logout';
 import { UserContext } from '../../contexts/UserContext';
+import Modal from '../Modal';
 
 const NewColumn = styled.div`
     width: calc(calc(100vw - 140px) / 4);
@@ -42,7 +42,7 @@ const Column = () => {
         setTaskContent(event.currentTarget.value);
     };
 
-    const createNewTask = async () => {
+    const createNewTask = async (): Promise<void> => {
         if (!taskTitle || !taskContent) {
             changeMessage('Please fill all fields.');
             setModalType('error');
@@ -63,10 +63,7 @@ const Column = () => {
             }
 
             setTaskTitle('');
-            setTaskContent('');
-            changeMessage('Task created successfully.');
-            setModalType('success');
-            return setIsModalOpen(true);
+            return setTaskContent('');
         } catch (error) {
             if (error instanceof Error) {
                 changeMessage(error.message);

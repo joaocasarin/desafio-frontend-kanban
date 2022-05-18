@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+import { Button, TextField } from '@mui/material';
 import React, { ChangeEvent, FormEvent, useContext, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -7,67 +8,28 @@ import Modal from '../Modal';
 
 const Form = styled.form`
     width: 350px;
-    height: 250px;
+    height: 300px;
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
 
-    background-color: rgb(105, 161, 245);
+    background-color: white;
 
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 `;
 
-const Input = styled.input`
-    height: 30px;
-
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-
-    padding: 0 10px;
-    margin: 0 0 0 10px;
-
-    font-size: 16px;
-    font-weight: bold;
-
-    &:focus {
-        outline: none;
-    }
-`;
-
-const Button = styled.button`
-    height: 30px;
-
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-
-    padding: 0 10px;
-    margin: 0 0 0 10px;
-
-    font-size: 16px;
-    font-weight: bold;
-
-    &:hover {
-        cursor: pointer;
-
-        background-color: rgb(4, 254, 170);
-    }
-`;
-
 const LoginForm = () => {
     const { login, isAuthenticated } = useContext(UserContext);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     if (isAuthenticated) {
         return <Navigate to='/dashboard' replace />;
     }
-
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const onCloseModal = () => setIsModalOpen(false);
 
@@ -90,8 +52,7 @@ const LoginForm = () => {
 
             return <Navigate to='/dashboard' replace />;
         } catch (error) {
-            console.log(error);
-            setIsModalOpen(true);
+            return setIsModalOpen(true);
         }
     };
 
@@ -99,17 +60,30 @@ const LoginForm = () => {
         <Form onSubmit={onSubmit}>
             <h2>Login</h2>
 
-            <label htmlFor='username'>
-                Username:
-                <Input type='text' id='username' onChange={onUsernameChange} value={username} />
-            </label>
+            <TextField
+                label='Username'
+                type='text'
+                id='username'
+                onChange={onUsernameChange}
+                value={username}
+                variant='standard'
+                required
+                autoFocus
+            />
 
-            <label htmlFor='password'>
-                Password:
-                <Input type='password' id='password' onChange={onPasswordChange} value={password} />
-            </label>
+            <TextField
+                label='Password'
+                type='password'
+                id='password'
+                onChange={onPasswordChange}
+                value={password}
+                variant='standard'
+                required
+            />
 
-            <Button type='submit'>Login</Button>
+            <Button variant='contained' type='submit' color='info'>
+                Login
+            </Button>
 
             <Modal
                 displayType='error'

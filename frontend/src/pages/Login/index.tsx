@@ -6,8 +6,7 @@ const Div = styled.div`
     justify-content: center;
     align-items: center;
 
-    background-color: #8edcff;
-
+    background-image: linear-gradient(to bottom right, #a9fcb8, #e1a9fc);
     width: 100vw;
     height: 100vh;
 `;

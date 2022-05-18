@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
-import { createContext, useState } from 'react';
+import { createContext } from 'react';
 import { useLocalStorage } from 'react-use';
 import { UserContextProps, UserProviderProps } from '../interfaces';
 import { api } from '../utils';
@@ -7,7 +7,7 @@ import { api } from '../utils';
 export const UserContext = createContext({} as UserContextProps);
 
 export const UserProvider = ({ children }: UserProviderProps) => {
-    const [token, setToken, removeToken] = useLocalStorage<string>('token');
+    const [token, setToken, removeToken] = useLocalStorage<string>('token', '', { raw: true });
     const [isAuthenticated, setIsAuthenticated, removeIsAuth] = useLocalStorage<boolean>(
         'isAuthenticated',
         false
@@ -25,7 +25,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 
         const { data } = response as { data: string };
 
-        localStorage.setItem('token', data);
+        setToken(data);
         setIsAuthenticated(true);
     };
 
