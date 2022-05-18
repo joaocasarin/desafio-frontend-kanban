@@ -39,6 +39,8 @@ module.exports = {
         'react/jsx-filename-extension': 'off',
         'react/react-in-jsx-scope': 'off',
         'react/function-component-definition': 'off',
+        'react/jsx-props-no-spreading': 'off',
+        'react/require-default-props': 'off',
         'jsx-a11y/anchor-is-valid': 'off',
         'import/extensions': ['error', 'never', { json: 'always', css: 'always' }],
         'import/prefer-default-export': 'off',
